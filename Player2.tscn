@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://hsmxynegh6t1"]
+
+[ext_resource type="Script" path="res://CharacterBody2DPlayer2.gd" id="1_v5whu"]
+[ext_resource type="Texture2D" uid="uid://2e1hd5e3ry5r" path="res://Racket.png" id="2_6rkj1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxk75"]
+size = Vector2(31, 159)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxub4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6rkj1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ex1qh"]
+size = Vector2(3.5, 160)
+
+[node name="Player2" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_v5whu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_vxk75")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(1, -3.8743e-06)
+scale = Vector2(0.775, 1.11888)
+sprite_frames = SubResource("SpriteFrames_wxub4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+
+[node name="Rage" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Rage"]
+position = Vector2(-13.75, 0)
+shape = SubResource("RectangleShape2D_ex1qh")
+debug_color = Color(0.529412, 0.564706, 0.219608, 0.419608)
+
+[connection signal="body_entered" from="CharacterBody2D/Rage" to="CharacterBody2D" method="_on_rage_body_entered"]

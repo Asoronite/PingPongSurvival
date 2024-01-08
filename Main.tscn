@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmukc7jfyk0yk"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_17ly4"]
+[ext_resource type="Texture2D" uid="uid://sek1ayw5t73j" path="res://ButtonBG.png" id="2_jjehk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k8vbm"]
+texture = ExtResource("2_jjehk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v6hhb"]
+texture = ExtResource("2_jjehk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qcq6n"]
+texture = ExtResource("2_jjehk")
+
+[node name="Main" type="Node2D"]
+position = Vector2(-2, 1)
+script = ExtResource("1_17ly4")
+
+[node name="Start" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 460.0
+offset_top = 245.0
+offset_right = 710.0
+offset_bottom = 378.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_colors/font_hover_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_colors/font_focus_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_k8vbm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_v6hhb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qcq6n")
+text = "Start"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 139.0
+offset_top = 440.0
+offset_right = 1039.0
+offset_bottom = 560.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "						Controls:
+ Player1 : [W,S]    			Player2 : [ArrowUp, ArrowDown]"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 952.0
+offset_top = 605.0
+offset_right = 1138.0
+offset_bottom = 638.0
+text = "Enes Köse / Asoronite"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -2.0
+offset_top = 91.0
+offset_right = 1152.0
+offset_bottom = 233.0
+theme_override_colors/font_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Try to be the last Survivor!
+Evertime your opponent touchs the ball or you miss it, your racket shrinks."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

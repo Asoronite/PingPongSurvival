@@ -1,0 +1,208 @@
+[gd_scene load_steps=19 format=3 uid="uid://c7byhfjq2bt1j"]
+
+[ext_resource type="PackedScene" uid="uid://b54apv7v2ifr3" path="res://Player1.tscn" id="1_5fjfo"]
+[ext_resource type="PackedScene" uid="uid://hsmxynegh6t1" path="res://Player2.tscn" id="2_ql2xo"]
+[ext_resource type="PackedScene" uid="uid://b2h3l3kuav51y" path="res://Ball.tscn" id="3_nj6m4"]
+[ext_resource type="Script" path="res://Player1Score.gd" id="4_oe4sc"]
+[ext_resource type="Script" path="res://Player2Score.gd" id="5_hgmsx"]
+[ext_resource type="Script" path="res://EndScreen.gd" id="6_ac363"]
+[ext_resource type="Texture2D" uid="uid://sek1ayw5t73j" path="res://ButtonBG.png" id="8_g7lax"]
+[ext_resource type="Script" path="res://Control.gd" id="9_50fqd"]
+[ext_resource type="Texture2D" uid="uid://clc2h1crw11ic" path="res://RestartIcon.png" id="9_d5rcf"]
+[ext_resource type="Texture2D" uid="uid://gsswv78yca8s" path="res://Court.png" id="9_e8wq1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnhke"]
+size = Vector2(1158, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4g1j"]
+size = Vector2(15, 654)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yk0yd"]
+texture = ExtResource("8_g7lax")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xnqyo"]
+texture = ExtResource("8_g7lax")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbe07"]
+texture = ExtResource("8_g7lax")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nald0"]
+texture = ExtResource("8_g7lax")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4pmdv"]
+texture = ExtResource("8_g7lax")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7jl8s"]
+texture = ExtResource("8_g7lax")
+
+[node name="GameArea" type="Node2D"]
+
+[node name="Player1" parent="." instance=ExtResource("1_5fjfo")]
+position = Vector2(79, 325)
+
+[node name="Player2" parent="." instance=ExtResource("2_ql2xo")]
+position = Vector2(1073, 325)
+
+[node name="Ball" parent="." instance=ExtResource("3_nj6m4")]
+position = Vector2(573, 318)
+
+[node name="BounceWalls" type="Area2D" parent="."]
+position = Vector2(3, -2)
+
+[node name="WallUp" type="CollisionShape2D" parent="BounceWalls"]
+visible = false
+position = Vector2(578, -6)
+shape = SubResource("RectangleShape2D_xnhke")
+
+[node name="WallDown" type="CollisionShape2D" parent="BounceWalls"]
+visible = false
+position = Vector2(575, 659)
+shape = SubResource("RectangleShape2D_xnhke")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = -37.0
+offset_right = 1152.0
+offset_bottom = 3.0
+
+[node name="Panel" type="Panel" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_top = 687.0
+offset_right = 1146.0
+offset_bottom = 727.0
+
+[node name="ScoreWalls" type="Area2D" parent="."]
+position = Vector2(22, 103)
+
+[node name="WallLeft" type="CollisionShape2D" parent="ScoreWalls"]
+position = Vector2(-32, 222)
+shape = SubResource("RectangleShape2D_f4g1j")
+
+[node name="WallRight" type="CollisionShape2D" parent="ScoreWalls"]
+position = Vector2(1135, 225)
+shape = SubResource("RectangleShape2D_f4g1j")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 326)
+
+[node name="NodeLabels" type="Node" parent="."]
+
+[node name="Player1Volume" type="Label" parent="NodeLabels"]
+unique_name_in_owner = true
+offset_left = 147.0
+offset_top = 82.0
+offset_right = 225.0
+offset_bottom = 131.0
+theme_override_colors/font_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+script = ExtResource("4_oe4sc")
+
+[node name="Player2Volume" type="Label" parent="NodeLabels"]
+unique_name_in_owner = true
+offset_left = 935.0
+offset_top = 82.0
+offset_right = 1052.0
+offset_bottom = 131.0
+theme_override_colors/font_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+script = ExtResource("5_hgmsx")
+
+[node name="EndScreen" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("6_ac363")
+
+[node name="PlayAgain" type="Button" parent="EndScreen"]
+z_index = 1
+layout_mode = 0
+offset_left = 194.0
+offset_top = 230.0
+offset_right = 494.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxTexture_yk0yd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xnqyo")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fbe07")
+text = "Play Again"
+
+[node name="Exit" type="Button" parent="EndScreen"]
+z_index = 1
+layout_mode = 0
+offset_left = 637.0
+offset_top = 230.0
+offset_right = 937.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxTexture_nald0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4pmdv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7jl8s")
+text = "Exit"
+
+[node name="Winner" type="Label" parent="EndScreen"]
+layout_mode = 0
+offset_left = 409.0
+offset_top = 102.0
+offset_right = 733.0
+offset_bottom = 171.0
+theme_override_colors/font_color = Color(0.819608, 0.968627, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Player x won!"
+
+[node name="ColorRect" type="ColorRect" parent="EndScreen"]
+z_index = -5
+layout_mode = 0
+offset_left = -55.0
+offset_top = -34.0
+offset_right = 1181.0
+offset_bottom = 688.0
+mouse_filter = 2
+color = Color(0.196078, 0.196078, 0.196078, 0.780392)
+
+[node name="Label" type="Label" parent="EndScreen"]
+layout_mode = 0
+offset_left = 890.0
+offset_top = 595.0
+offset_right = 1077.0
+offset_bottom = 627.0
+text = "Enes Köse / Asoronite"
+
+[node name="CourtBG" type="TextureRect" parent="."]
+z_index = -100
+offset_left = -4.0
+offset_top = 1.0
+offset_right = 1157.0
+offset_bottom = 647.0
+mouse_filter = 2
+texture = ExtResource("9_e8wq1")
+
+[node name="ControlRestart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(10, 10)
+script = ExtResource("9_50fqd")
+
+[node name="TextureButton" type="TextureButton" parent="ControlRestart"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.706
+anchor_right = 0.342
+anchor_bottom = 0.824
+offset_left = 54.8
+offset_top = 1.09999
+offset_right = 597.206
+offset_bottom = 637.152
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.01, 0.01)
+texture_normal = ExtResource("9_d5rcf")
+stretch_mode = 0
+flip_h = true
+
+[connection signal="pressed" from="EndScreen/PlayAgain" to="EndScreen" method="_on_play_again_pressed"]
+[connection signal="pressed" from="EndScreen/Exit" to="EndScreen" method="_on_exit_pressed"]
+[connection signal="pressed" from="ControlRestart/TextureButton" to="ControlRestart" method="_on_texture_button_pressed"]

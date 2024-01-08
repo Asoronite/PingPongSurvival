@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2h3l3kuav51y"]
+
+[ext_resource type="Texture2D" uid="uid://bx48sfcpdmode" path="res://Ball.png" id="1_kqs1y"]
+[ext_resource type="Script" path="res://BallScript.gd" id="1_ml4i4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lcql"]
+radius = 35.0143
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ky8m5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kqs1y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_3usps"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q46yo"]
+_data = {
+"new_animation": SubResource("Animation_3usps")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwtuq"]
+radius = 36.0
+
+[node name="Ball" type="Node2D"]
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+script = ExtResource("1_ml4i4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_5lcql")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ball"]
+position = Vector2(-0.5, 6)
+scale = Vector2(0.39, 0.38)
+sprite_frames = SubResource("SpriteFrames_ky8m5")
+frame_progress = 0.977511
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ball"]
+libraries = {
+"": SubResource("AnimationLibrary_q46yo")
+}
+
+[node name="RageBall" type="Area2D" parent="Ball"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball/RageBall"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_dwtuq")
+debug_color = Color(0.92549, 0, 0.67451, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Ball/RageBall" to="Ball" method="_on_rage_ball_area_entered"]
+[connection signal="timeout" from="Timer" to="Ball" method="_on_timer_timeout"]
